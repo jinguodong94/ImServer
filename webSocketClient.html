@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function webSocket() {
+        if ("WebSocket" in window) {
+            console.log("您的浏览器支持WebSocket");
+            var ws = new WebSocket("ws://localhost:8686/websocket"); //创建WebSocket连接
+            ws.onopen = function () {
+                //当WebSocket创建成功时，触发onopen事件
+                console.log("open");
+                // {"type":"0","data":{"token":"sdfkldsjalfjlksdajflkjsdaljflkksadjfkljsadlkfjlksadjlfasd"}}
+                var text = "{\"type\":0,\"data\":{\"token\":\"sdfkldsjalfjlksdajflkjsdaljflkksadjfkljsadlkfjlksadjlfasd\"}}"
+                ws.send(text); //将消息发送到服务端
+            }
+        } else {
+            console.log("您的浏览器不支持WebSocket");
+        }
+    }
+
+    webSocket()
+</script>
+</body>
+</html>
