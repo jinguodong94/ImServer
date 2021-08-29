@@ -22,3 +22,484 @@
 [server] 2021/08/27 18:07:45 启动http服务
 [GIN-debug] Listening and serving HTTP on :8989
 [GIN] 2021/08/27 - 18:07:49 | 200 |      1.8122ms |             ::1 | POST     "/user/login"
+[server] 2021/08/29 11:46:54 初始化配置
+[server] 2021/08/29 11:46:54 初始化redis
+[server] 2021/08/29 11:46:54 初始数据库连接
+[server] 2021/08/29 11:46:54 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 11:46:54 启动定时清理客户端任务
+[server] 2021/08/29 11:46:54 启动http服务
+[server] 2021/08/29 11:46:54 启动websocket服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 11:48:17 client open ip is : 127.0.0.1:59047
+[server] 2021/08/29 11:48:17 process data [ip : 127.0.0.1:59047] [userId : ]   data ->  {"type":0,"data":{"token":"sdfkldsjalfjlksdajflkjsdaljflkksadjfkljsadlkfjlksadjlfasd"}}
+[server] 2021/08/29 11:48:17 处理心跳 sdfkldsjalfjlksdajflkjsdaljflkksadjfkljsadlkfjlksadjlfasd
+[server] 2021/08/29 11:48:39 client read error [ip : 127.0.0.1:59047] [userId : ]  errInfo-> websocket: close 1001 (going away)
+[server] 2021/08/29 11:48:39 close client channel [ip : 127.0.0.1:59047] [userId : ] 
+[server] 2021/08/29 11:48:39 client write channel close [ip : 127.0.0.1:59047] [userId : ] 
+[server] 2021/08/29 11:48:39 client close connect [ip : 127.0.0.1:59047] [userId : ] 
+[server] 2021/08/29 13:50:44 初始化配置
+[server] 2021/08/29 13:50:44 初始化redis
+[server] 2021/08/29 13:50:44 初始数据库连接
+[server] 2021/08/29 13:50:44 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 13:50:44 启动定时清理客户端任务
+[server] 2021/08/29 13:50:44 启动websocket服务
+[server] 2021/08/29 13:50:45 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 13:52:14 初始化配置
+[server] 2021/08/29 13:52:14 初始化redis
+[server] 2021/08/29 13:52:14 初始数据库连接
+[server] 2021/08/29 13:52:14 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 13:52:14 启动定时清理客户端任务
+[server] 2021/08/29 13:52:14 启动websocket服务
+[server] 2021/08/29 13:52:32 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 13:53:41 初始化配置
+[server] 2021/08/29 13:53:41 初始化redis
+[server] 2021/08/29 13:53:41 初始数据库连接
+[server] 2021/08/29 13:53:41 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 13:53:41 启动定时清理客户端任务
+[server] 2021/08/29 13:53:41 启动websocket服务
+[server] 2021/08/29 13:53:42 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 13:57:28 初始化配置
+[server] 2021/08/29 13:57:28 初始化redis
+[server] 2021/08/29 13:57:28 初始数据库连接
+[server] 2021/08/29 13:57:28 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 13:57:28 启动定时清理客户端任务
+[server] 2021/08/29 13:57:28 启动websocket服务
+[server] 2021/08/29 13:57:29 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:00:05 初始化配置
+[server] 2021/08/29 14:00:05 初始化redis
+[server] 2021/08/29 14:00:05 初始数据库连接
+[server] 2021/08/29 14:00:05 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:00:05 启动定时清理客户端任务
+[server] 2021/08/29 14:00:05 启动websocket服务
+[server] 2021/08/29 14:01:07 初始化配置
+[server] 2021/08/29 14:01:07 初始化redis
+[server] 2021/08/29 14:01:07 初始数据库连接
+[server] 2021/08/29 14:01:07 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:01:07 启动定时清理客户端任务
+[server] 2021/08/29 14:01:07 启动websocket服务
+[server] 2021/08/29 14:01:07 获取消费通道异常:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:01:08 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:02:59 初始化配置
+[server] 2021/08/29 14:02:59 初始化redis
+[server] 2021/08/29 14:02:59 初始数据库连接
+[server] 2021/08/29 14:02:59 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:02:59 启动定时清理客户端任务
+[server] 2021/08/29 14:02:59 启动websocket服务
+[server] 2021/08/29 14:03:00 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:05:59 初始化配置
+[server] 2021/08/29 14:05:59 初始化redis
+[server] 2021/08/29 14:05:59 初始数据库连接
+[server] 2021/08/29 14:05:59 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:05:59 启动定时清理客户端任务
+[server] 2021/08/29 14:05:59 启动websocket服务
+[server] 2021/08/29 14:06:00 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:11:47 初始化配置
+[server] 2021/08/29 14:11:47 初始化redis
+[server] 2021/08/29 14:11:47 初始数据库连接
+[server] 2021/08/29 14:11:47 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:11:47 启动定时清理客户端任务
+[server] 2021/08/29 14:11:47 启动websocket服务
+[server] 2021/08/29 14:11:47 获取消费通道异常:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:11:48 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:12:50 初始化配置
+[server] 2021/08/29 14:12:50 初始化redis
+[server] 2021/08/29 14:12:50 初始数据库连接
+[server] 2021/08/29 14:12:50 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:12:50 启动定时清理客户端任务
+[server] 2021/08/29 14:12:50 启动websocket服务
+[server] 2021/08/29 14:12:50 获取消费通道异常:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:12:51 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:13:40 初始化配置
+[server] 2021/08/29 14:13:40 初始化redis
+[server] 2021/08/29 14:13:40 初始数据库连接
+[server] 2021/08/29 14:13:40 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:13:40 启动定时清理客户端任务
+[server] 2021/08/29 14:13:40 启动websocket服务
+[server] 2021/08/29 14:13:40 获取消费通道异常:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:13:41 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:15:49 初始化配置
+[server] 2021/08/29 14:15:49 初始化redis
+[server] 2021/08/29 14:15:49 初始数据库连接
+[server] 2021/08/29 14:15:49 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:15:49 启动定时清理客户端任务
+[server] 2021/08/29 14:15:49 启动websocket服务
+[server] 2021/08/29 14:15:49 MQ注册队列失败:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:15:49 绑定队列失败:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:15:50 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:16:39 初始化配置
+[server] 2021/08/29 14:16:39 初始化redis
+[server] 2021/08/29 14:16:39 初始数据库连接
+[server] 2021/08/29 14:16:39 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:16:39 启动定时清理客户端任务
+[server] 2021/08/29 14:16:39 启动websocket服务
+[server] 2021/08/29 14:16:40 MQ注册队列失败:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:16:40 绑定队列失败:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:16:40 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:18:33 初始化配置
+[server] 2021/08/29 14:18:33 初始化redis
+[server] 2021/08/29 14:18:33 初始数据库连接
+[server] 2021/08/29 14:18:33 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:18:33 启动定时清理客户端任务
+[server] 2021/08/29 14:18:33 启动websocket服务
+[server] 2021/08/29 14:18:33 MQ注册队列失败:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:18:33 绑定队列失败:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:18:34 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:21:40 初始化配置
+[server] 2021/08/29 14:21:40 初始化redis
+[server] 2021/08/29 14:21:40 初始数据库连接
+[server] 2021/08/29 14:21:40 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:21:40 启动定时清理客户端任务
+[server] 2021/08/29 14:21:40 启动websocket服务
+[server] 2021/08/29 14:21:40 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:21:40 MQ注册队列失败:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:21:40 绑定队列失败:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:23:24 初始化配置
+[server] 2021/08/29 14:23:24 初始化redis
+[server] 2021/08/29 14:23:24 初始数据库连接
+[server] 2021/08/29 14:23:24 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:23:24 启动定时清理客户端任务
+[server] 2021/08/29 14:23:24 启动websocket服务
+[server] 2021/08/29 14:23:24 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:27:01 初始化配置
+[server] 2021/08/29 14:27:01 初始化redis
+[server] 2021/08/29 14:27:01 初始数据库连接
+[server] 2021/08/29 14:27:01 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:27:01 启动定时清理客户端任务
+[server] 2021/08/29 14:27:01 启动websocket服务
+[server] 2021/08/29 14:27:01 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:27:01 MQ注册队列失败:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:27:01 绑定队列失败:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:31:25 初始化配置
+[server] 2021/08/29 14:31:25 初始化redis
+[server] 2021/08/29 14:31:25 初始数据库连接
+[server] 2021/08/29 14:31:25 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:31:25 启动定时清理客户端任务
+[server] 2021/08/29 14:31:25 启动websocket服务
+[server] 2021/08/29 14:31:25 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989
+[server] 2021/08/29 14:31:25 MQ注册队列失败:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:31:25 绑定队列失败:Exception (504) Reason: "channel/connection is not open" 
+[server] 2021/08/29 14:37:25 初始化配置
+[server] 2021/08/29 14:37:25 初始化redis
+[server] 2021/08/29 14:37:25 初始数据库连接
+[server] 2021/08/29 14:37:25 初始化路由
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /user/login               --> gindemo/controller.UserController.Login-fm (3 handlers)
+[GIN-debug] POST   /user/register            --> gindemo/controller.UserController.Register-fm (3 handlers)
+[GIN-debug] POST   /user/getUserInfo         --> gindemo/controller.UserController.GetUserInfo-fm (3 handlers)
+[GIN-debug] POST   /user/updateUserInfo      --> gindemo/controller.UserController.UpdateUserInfo-fm (3 handlers)
+[GIN-debug] POST   /friend/addFriend         --> gindemo/controller.FriendController.AddFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/delFriend         --> gindemo/controller.FriendController.DelFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/blackFriend       --> gindemo/controller.FriendController.BlackFriend-fm (3 handlers)
+[GIN-debug] POST   /friend/getFriendList     --> gindemo/controller.FriendController.GetFriendList-fm (3 handlers)
+[GIN-debug] GET    /systemStatus             --> gindemo/controller.SystemController.GetSystemStatus-fm (3 handlers)
+[server] 2021/08/29 14:37:25 启动定时清理客户端任务
+[server] 2021/08/29 14:37:25 启动websocket服务
+[server] 2021/08/29 14:37:43 启动http服务
+[GIN-debug] Listening and serving HTTP on :8989

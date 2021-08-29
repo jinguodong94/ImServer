@@ -3,6 +3,7 @@ package main
 import (
 	"gindemo/conf"
 	"gindemo/dao"
+	"gindemo/mq"
 	"gindemo/plog"
 	"gindemo/route"
 	"gindemo/task"
@@ -16,6 +17,7 @@ func main() {
 		//关闭连接
 		dao.CloseRedis()
 		dao.CloseMysql()
+		mq.Close()
 	}()
 
 	plog.Init()
@@ -37,6 +39,8 @@ func main() {
 
 	//启动websocket 服务
 	go ws.StartServer("localhost:8686")
+
+	mq.Init()
 
 	//启动http服务
 	log.Println("启动http服务")

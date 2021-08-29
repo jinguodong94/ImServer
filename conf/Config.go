@@ -7,8 +7,9 @@ import (
 )
 
 type Config struct {
-	MysqlConfig MysqlConfig `ini:"mysql"`
-	RedisConfig RedisConfig `ini:"redis"`
+	MysqlConfig    MysqlConfig    `ini:"mysql"`
+	RedisConfig    RedisConfig    `ini:"redis"`
+	RabbitMQConfig RabbitMQConfig `ini:"rabbitMQ"`
 }
 
 var Configs = new(Config)
@@ -33,5 +34,10 @@ type MysqlConfig struct {
 
 type RedisConfig struct {
 	Address string `ini:"address"`
+	Pwd     string `ini:"pwd"`
+}
+type RabbitMQConfig struct {
+	Address string `ini:"address"`
+	User    string `ini:"user"`
 	Pwd     string `ini:"pwd"`
 }
