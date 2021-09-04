@@ -3,6 +3,7 @@ package response
 const (
 	SUCCESS = iota
 	ERROR
+	NOT_LOGIN_ERROR
 )
 
 type Response struct {
@@ -33,5 +34,10 @@ func NewSuccessResponse(msg string, data interface{}) (resp *Response) {
 
 func NewErrorResponse(msg string) (resp *Response) {
 	resp = NewResponse(ERROR, msg, nil)
+	return
+}
+
+func NewNotLoginErrorResponse() (resp *Response) {
+	resp = NewResponse(NOT_LOGIN_ERROR, "未登录", nil)
 	return
 }

@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"gindemo/ws"
+	"gindemo/socket"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -12,7 +12,7 @@ type SystemController struct {
 
 func (SystemController) GetSystemStatus(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
-		"allClient":     len(ws.ClientMgr.GetAllClient()),
-		"loginedClient": len(ws.ClientMgr.GetLoginClient()),
+		"allClient":     len(socket.ClientMgr.GetAllClient()),
+		"loginedClient": len(socket.ClientMgr.GetLoginClient()),
 	})
 }

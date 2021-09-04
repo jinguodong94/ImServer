@@ -4,10 +4,10 @@ import (
 	"gindemo/conf"
 	"gindemo/dao"
 	"gindemo/mq"
-	"gindemo/plog"
 	"gindemo/route"
+	"gindemo/socket"
 	"gindemo/task"
-	"gindemo/ws"
+	"github.com/json-iterator/go/extra"
 	"log"
 )
 
@@ -17,10 +17,10 @@ func main() {
 		//关闭连接
 		dao.CloseRedis()
 		dao.CloseMysql()
-		mq.Close()
+		if mq.MQ != nil {
+			mq.MQ.Close()
+		}
 	}()
-
-	plog.Init()
 
 	//初始化配置
 	conf.Init()
@@ -38,11 +38,18 @@ func main() {
 	task.StartClearClientTask()
 
 	//启动websocket 服务
-	go ws.StartServer("localhost:8686")
+	go socket.StartServer("localhost:8686")
 
-	mq.Init()
+	//初始化MQ
+	mq.MQ = mq.NewRabbitMQ("msg", "amq.topic", conf.Configs.ServerConfig.ServerId, socket.Consumer)
+	go mq.MQ.Start()
 
 	//启动http服务
 	log.Println("启动http服务")
 	route.Route.Run(":8989")
+}
+
+func init() {
+	extra.RegisterFuzzyDecoders()
+	InitLog()
 }

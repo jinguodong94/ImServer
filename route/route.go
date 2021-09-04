@@ -39,5 +39,21 @@ func Init() {
 		//好友列表
 		friendGroup.POST("/getFriendList", controller.FriendController{}.GetFriendList)
 	}
+
+	//群相关
+	groupGroup := Route.Group("/group")
+	groupGroup.Use(controller.AuthController{}.LoginAuth)
+	{
+		groupGroup.POST("/createGroup", controller.GroupController{}.CreateGroup)
+
+		groupGroup.POST("/joinGroup", controller.GroupController{}.JoinGroup)
+
+		groupGroup.POST("/exitGroup", controller.GroupController{}.ExitGroup)
+
+		groupGroup.POST("/dissolveGroup", controller.GroupController{}.DissolveGroup)
+
+		groupGroup.GET("/getGroupList", controller.GroupController{}.GetGroupList)
+	}
+
 	Route.GET("/systemStatus", controller.SystemController{}.GetSystemStatus)
 }

@@ -18,7 +18,6 @@ func StartClearClientTask() {
 
 func tick(ticker *time.Ticker) {
 	for range ticker.C {
-		fmt.Printf("ticked at %v", time.Now())
-
+		log.Println(fmt.Sprintf("ticked at %v", time.Now()))
 	}
 }

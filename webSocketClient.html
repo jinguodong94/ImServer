@@ -5,25 +5,83 @@
     <title>Title</title>
 </head>
 <body>
+<ul id="list">
+</ul>
 <script>
+    var ws
 
     function webSocket() {
         if ("WebSocket" in window) {
             console.log("您的浏览器支持WebSocket");
-            var ws = new WebSocket("ws://localhost:8686/websocket"); //创建WebSocket连接
+            ws = new WebSocket("ws://localhost:8686/websocket"); //创建WebSocket连接
             ws.onopen = function () {
                 //当WebSocket创建成功时，触发onopen事件
                 console.log("open");
                 // {"type":"0","data":{"token":"sdfkldsjalfjlksdajflkjsdaljflkksadjfkljsadlkfjlksadjlfasd"}}
-                var text = "{\"type\":0,\"data\":{\"token\":\"sdfkldsjalfjlksdajflkjsdaljflkksadjfkljsadlkfjlksadjlfasd\"}}"
-                ws.send(text); //将消息发送到服务端
+                // var text = "{\"type\":0,\"data\":{\"token\":\"sdfkldsjalfjlksdajflkjsdaljflkksadjfkljsadlkfjlksadjlfasd\"}}"
+                // var text = "{\"type\":\"1\",\"data\":{\"account\":\"13266611622\",\"pwd\":\"jelly123\"}}"
+                // var text = "{\"type\":\"1\",\"data\":{\"account\":\"13266611611\",\"pwd\":\"jelly123\"}}"
+                // var text = "{\"type\":\"0\",\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOjUsImV4cCI6MTk0NTgyNzYxNiwiaWF0IjoxNjMwNDY3NjE2LCJpc3MiOiIxMjcuMC4wLjEiLCJzdWIiOiJ1c2VyIHRva2VuIn0.hHwYkw2NnpQ8jgMeuFmN9hN-9rGWJVUgVIMO2YibD44\"}}"
+                // socket.send(text); //将消息发送到服务端
+            }
+
+            ws.onmessage = function (message) {
+                console.log(message.data)
+                var ul = document.getElementById("list");
+                var htm = "<li>" + message.data + "</li>";
+                ul.innerHTML += htm;
             }
         } else {
             console.log("您的浏览器不支持WebSocket");
         }
     }
 
+    function login() {
+        let account = document.getElementById("et_account").value
+        let pwd = document.getElementById("et_pwd").value
+        var jsonData = {
+            "type": "1", "data": {
+                "account": account,
+                "pwd": pwd
+            }
+        }
+
+        ws.send(JSON.stringify(jsonData))
+    }
+
     webSocket()
+
+
+    function sendMessage() {
+        let textContent = document.getElementById("et_content").value;
+        let uid = document.getElementById("et_uid").value;
+        let data = {
+            "type": "2",
+            "data": {
+                "chat_type": "1",
+                "msg_type": 0,
+                "from_uid": uid,
+                "to_uid": 1,
+                "extend_info": "111",
+                "message_content": textContent
+            }
+        };
+        ws.send(JSON.stringify(data))
+    }
 </script>
+
+<input id="et_content" type="text" name="聊天内容">
+<button onclick="sendMessage()">发送</button>
+<br/><br/><br/><br/><br/><br/>
+uid
+<input id="et_uid" type="text" name="uid">
+<br/>
+账号
+<input id="et_account" type="text" name="账号">
+<br/>
+密码
+<input id="et_pwd" type="text" name="密码">
+<br/>
+<button onclick="login()">login</button>
 </body>
 </html>

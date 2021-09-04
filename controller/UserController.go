@@ -3,12 +3,14 @@ package controller
 import (
 	"context"
 	"fmt"
+	"gindemo/constant"
 	"gindemo/dao"
 	"gindemo/req"
 	"gindemo/response"
 	"gindemo/utils"
 	"github.com/gin-gonic/gin"
 	"strconv"
+	"time"
 )
 
 type UserController struct {
@@ -34,7 +36,9 @@ func (userController UserController) Login(ctx *gin.Context) {
 	//生成token
 	token := utils.TokenUtils.CreateToken(user.ID)
 
-	dao.Rdb.RPush(context.Background(), "user_login_token", fmt.Sprintf("%s:%s", strconv.FormatUint(uint64(user.ID), 10), token))
+	dao.Rdb.Set(context.Background(),
+		fmt.Sprintf("%s:%s", constant.Redis_key_user_login_token, strconv.FormatUint(uint64(user.ID), 10)),
+		token, time.Hour*24*30)
 
 	userInfo := &response.UserInfo{
 		Account:  user.Account,
@@ -71,8 +75,9 @@ func (userController UserController) Register(ctx *gin.Context) {
 
 	//生成token
 	token := utils.TokenUtils.CreateToken(users.ID)
-
-	dao.Rdb.RPush(context.Background(), "user_login_token", fmt.Sprintf("%s:%s", strconv.FormatUint(uint64(users.ID), 10), token))
+	dao.Rdb.Set(context.Background(),
+		fmt.Sprintf("%s:%s", constant.Redis_key_user_login_token, strconv.FormatUint(uint64(users.ID), 10)),
+		token, time.Hour*24*30)
 
 	userInfo := &response.UserInfo{
 		Account:  users.Account,
@@ -86,7 +91,18 @@ func (userController UserController) Register(ctx *gin.Context) {
 
 //获取个人信息
 func (userController UserController) GetUserInfo(ctx *gin.Context) {
-
+	//userId, ok := ctx.GetQuery("userId")
+	//token := ctx.GetHeader("token")
+	//if token == "" && !ok {
+	//	responseOk(ctx, response.NewErrorResponse("参数有误"))
+	//	return
+	//}
+	//if token != "" {
+	//	id, err := utils.TokenUtils.GetUserId(token)
+	//	if err != nil {
+	//
+	//	}
+	//}
 }
 
 //修改个人信息

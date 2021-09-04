@@ -1,9 +1,10 @@
-package ws
+package socket
 
 import (
 	"errors"
 	"fmt"
 	"gindemo/constant"
+	"gindemo/dao"
 	"gindemo/model"
 	"gindemo/utils"
 	"github.com/gorilla/websocket"
@@ -92,7 +93,7 @@ func (client *Client) loopWrite() {
 }
 
 //发送消息
-func (client *Client) sendMessage(data []byte) (err error) {
+func (client *Client) SendMessage(data []byte) (err error) {
 	defer func() {
 		if rec := recover(); rec != nil {
 			err = errors.New("channel is close")
@@ -117,8 +118,11 @@ func (client *Client) processData(message []byte) {
 	request, err := GetRequest(messageData, nil)
 	if err != nil {
 		log.Println("json deserialization err -> ", err)
+		data, _ := jsoniter.Marshal(model.MsgResponse{RespType: constant.Resp_parm_parse_error, Data: "参数解析失败"})
+		client.SendMessage(data)
+		return
 	}
-	switch constant.ReqType(request.Type) {
+	switch request.Type {
 
 	case constant.Req_heartbeat:
 		//心跳
@@ -140,14 +144,24 @@ func (client *Client) processData(message []byte) {
 		processLogin(client, login)
 	case constant.Req_sendMessage:
 		//发送消息
-		request, err := GetRequest(messageData, &model.Message{})
+		request, err := GetRequest(messageData, &dao.Messages{})
 		if err != nil {
 			log.Println("json deserialization err -> ", err)
 			break
 		}
-		message := request.Data.(*model.Message)
+		message := request.Data.(*dao.Messages)
 		processMessage(client, message)
+	case constant.Req_ACK_Message:
+		//消息确认
+		request, err := GetRequest(messageData, &model.AckMessage{})
+		if err != nil {
+			log.Println("json deserialization err -> ", err)
+			break
+		}
+		ackMessage := request.Data.(*model.AckMessage)
+		processAckMessage(client, ackMessage)
 	}
+
 }
 
 func GetRequest(jsonData string, data interface{}) (request *model.MsgRequest, err error) {

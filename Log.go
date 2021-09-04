@@ -1,4 +1,4 @@
-package plog
+package main
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-func Init() {
+func InitLog() {
 	logFile, err := os.OpenFile("./server.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
 		fmt.Println("open plog file failed, err:", err)
