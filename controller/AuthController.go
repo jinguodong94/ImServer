@@ -3,11 +3,11 @@ package controller
 import (
 	"context"
 	"fmt"
-	"gindemo/constant"
-	"gindemo/dao"
-	"gindemo/response"
-	"gindemo/utils"
 	"github.com/gin-gonic/gin"
+	"imserver/constant"
+	"imserver/dao"
+	"imserver/response"
+	"imserver/utils"
 )
 
 type AuthController struct {

@@ -1,11 +1,11 @@
 package socket
 
 import (
-	"gindemo/constant"
-	"gindemo/dao"
-	"gindemo/model"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/streadway/amqp"
+	"imserver/constant"
+	"imserver/dao"
+	"imserver/model"
 	"log"
 	"strconv"
 )
@@ -35,6 +35,24 @@ func processMqMessage(jsonString string) {
 		processChatMessage(jsonString)
 	} else if mqMessage.Type == 1 {
 		processGroupMessage(jsonString)
+	} else if mqMessage.Type == 2 {
+		processRoomMessage(jsonString)
+	}
+}
+
+func processRoomMessage(jsonString string) {
+	log.Println("处理单聊 : ", jsonString)
+	mqMessage := &model.MqMessage{Data: &dao.Messages{}}
+	err := jsoniter.UnmarshalFromString(jsonString, mqMessage)
+	if err != nil {
+		log.Println("json解析失败 : ", jsonString)
+		return
+	}
+	message := mqMessage.Data.(*dao.Messages)
+	toClient := ClientMgr.GetClientByUserId(strconv.Itoa(int(message.ToUid)))
+	if toClient != nil {
+		messageBytes, _ := jsoniter.Marshal(model.MsgResponse{RespType: constant.Resp_recive_message, Data: message})
+		toClient.SendMessage(messageBytes)
 	}
 }
 
@@ -62,9 +80,9 @@ func processGroupMessage(jsonString string) {
 		if err != nil {
 			return
 		}
-		if message.MsgType != 1 && message.IsOffLine == 0 {
-			dao.Db.Model(&dao.GroupMessagesRelation{}).Where("msg_id = ? and uid = ?", message.ID, message.ToUid).Update("status", 1)
-		}
+		//if message.MsgType != 1 && message.IsOffLine == 0 {
+		//	dao.Db.Model(&dao.GroupMessagesRelation{}).Where("msg_id = ? and uid = ?", message.ID, message.ToUid).Update("status", 1)
+		//}
 	}
 }
 

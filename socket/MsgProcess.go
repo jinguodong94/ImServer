@@ -2,17 +2,17 @@ package socket
 
 import (
 	"context"
-	"errors"
 	"fmt"
-	"gindemo/conf"
-	"gindemo/constant"
-	"gindemo/dao"
-	"gindemo/model"
-	"gindemo/mq"
-	"gindemo/utils"
 	"github.com/json-iterator/go"
+	"imserver/conf"
+	"imserver/constant"
+	"imserver/dao"
+	"imserver/model"
+	"imserver/mq"
+	"imserver/utils"
 	"log"
 	"strconv"
+	"time"
 )
 
 //处理心跳
@@ -25,7 +25,7 @@ func processHeartbeat(client *Client, heartbeat *model.Heartbeat) {
 		return
 	}
 	info := &model.OnLineUserInfo{}
-	info, err = GetUserInfoById(strconv.FormatUint(uint64(uid), 10))
+	info, err = utils.RedisUtils.GetUserInfoById(strconv.FormatUint(uint64(uid), 10))
 	if err != nil {
 		data, _ := jsoniter.Marshal(model.MsgResponse{RespType: constant.Resp_heartbeat_error, Data: "未登录请先登录"})
 		client.SendMessage(data)
@@ -49,7 +49,7 @@ func processLogin(client *Client, login *model.Login) {
 	user := &dao.Users{}
 	result := dao.Db.Model(user).Where("account = ? and pwd = ? and deleted_at is null", login.Account, login.Pwd).First(user)
 
-	if result.RowsAffected <= 0 {
+	if result.Error != nil {
 		data, _ := jsoniter.Marshal(model.MsgResponse{RespType: constant.Resp_login_error, Data: "登录失败，账户或者密码错误"})
 		client.SendMessage(data)
 		return
@@ -143,7 +143,7 @@ func processSingleChat(client *Client, message *dao.Messages) {
 	data, _ := jsoniter.Marshal(model.MsgResponse{RespType: constant.Resp_send_message_success, Data: message.MsgFlag})
 	client.SendMessage(data)
 	//获取发送者信息
-	userInfo, err := GetUserInfoById(strconv.Itoa(int(message.ToUid)))
+	userInfo, err := utils.RedisUtils.GetUserInfoById(strconv.Itoa(int(message.ToUid)))
 	if err != nil {
 		//查询不到信息，说明对方没在线，就不管了，上线之后会发滞留的消息
 		return
@@ -170,7 +170,6 @@ func processGroupChat(client *Client, message *dao.Messages) {
 	groupMessage.MessageType = message.MessageType
 
 	if message.MsgType != 1 && message.IsOffLine == 0 {
-		//存入数据库
 		dao.Db.AutoMigrate(groupMessage)
 		t := dao.Db.Create(groupMessage)
 		if t.Error != nil {
@@ -184,34 +183,47 @@ func processGroupChat(client *Client, message *dao.Messages) {
 	client.SendMessage(data)
 
 	//获取群内成员信息
-	users := make([]dao.UserGroupRelation, 0, 6)
+	users := make([]dao.UserGroupRelation, 0, 50)
 	tx := dao.Db.Model(&dao.UserGroupRelation{}).Where("group_id = ? and deleted_at is null", message.ToUid).Find(&users)
 	if tx.Error != nil {
 		//没查询到群内的人
 		return
 	}
-	for _, value := range users {
+	dao.Db.AutoMigrate(&dao.GroupMessagesRelation{})
+
+	if message.MsgType != 1 && message.IsOffLine == 0 {
+		start := time.Now() // 获取当前时间
+		relations := make([]*dao.GroupMessagesRelation, 0, 50)
 		//存入表
-		if groupMessage.ID != 0 {
-			relation := &dao.GroupMessagesRelation{}
-			dao.Db.AutoMigrate(relation)
-			relation.Uid = value.Uid
-			relation.MsgId = groupMessage.ID
-			dao.Db.Create(relation)
+		for _, value := range users {
+			if groupMessage.ID != 0 {
+				relation := &dao.GroupMessagesRelation{}
+				relation.Uid = value.Uid
+				relation.MsgId = groupMessage.ID
+				relations = append(relations, relation)
+			}
 		}
-		userInfo, err := GetUserInfoById(strconv.Itoa(int(value.Uid)))
-		if err != nil {
-			continue
-		}
+		dao.Db.Create(relations)
+		elapsed := time.Since(start)
+		log.Println("群消息sql插入执行时间", elapsed)
+	}
+
+	for _, value := range users {
 		msg := &model.GroupMessage{
 			ToUid:         value.Uid,
 			GroupMessages: *groupMessage,
 		}
 		mqMessage := &model.MqMessage{Type: 1, Data: msg}
 		jsonMsg, _ := jsoniter.Marshal(mqMessage)
-		if conf.Configs.ServerConfig.ServerId == userInfo.ServerId {
+
+		cli := ClientMgr.GetClientByUserId(strconv.Itoa(int(value.Uid)))
+		if cli != nil {
 			processMqMessage(string(jsonMsg))
 		} else {
+			userInfo, err := utils.RedisUtils.GetUserInfoById(strconv.Itoa(int(value.Uid)))
+			if err != nil {
+				continue
+			}
 			mq.MQ.SendMessage(jsonMsg, userInfo.ServerId)
 		}
 	}
@@ -219,7 +231,32 @@ func processGroupChat(client *Client, message *dao.Messages) {
 
 //处理聊天室
 func processRoomChat(client *Client, message *dao.Messages) {
+	members, err := utils.RedisUtils.GetRoomMembers(message.ToUid)
+	if err != nil {
+		data, _ := jsoniter.Marshal(model.MsgResponse{RespType: constant.Resp_send_message_error, Data: message.MsgFlag})
+		client.SendMessage(data)
+		log.Println("聊天室不存在 > ", message.ToUid)
+		return
+	}
+	for _, uid := range members {
+		u, _ := strconv.Atoi(uid)
+		message.ToUid = uint(u)
+		mqMessage := &model.MqMessage{Type: 2, Data: message}
+		jsonMsg, _ := jsoniter.Marshal(mqMessage)
 
+		cli := ClientMgr.GetClientByUserId(uid)
+		if cli != nil {
+			processMqMessage(string(jsonMsg))
+		} else {
+			userInfo, err := utils.RedisUtils.GetUserInfoById(uid)
+			if err != nil {
+				continue
+			}
+			mq.MQ.SendMessage(jsonMsg, userInfo.ServerId)
+		}
+	}
+	data, _ := jsoniter.Marshal(model.MsgResponse{RespType: constant.Resp_send_message_success, Data: message.MsgFlag})
+	client.SendMessage(data)
 }
 
 //处理消息确认
@@ -237,60 +274,48 @@ func processAckMessage(client *Client, ackMessage *model.AckMessage) {
 			//没查询到消息不管了
 			return
 		}
-		dao.Db.Begin()
+		begin := dao.Db.Begin()
 		//删除临时消息表
-		tx = dao.Db.Unscoped().Delete(messages)
+		tx = begin.Unscoped().Delete(messages)
 		if tx.Error != nil {
-			dao.Db.Rollback()
+			begin.Rollback()
 			return
 		}
 		//新增到消息记录表
 		messageHistory := &dao.MessageHistory{}
-		dao.Db.AutoMigrate(messageHistory)
+		begin.AutoMigrate(messageHistory)
 		messageHistory.ChatType = messages.ChatType
 		messageHistory.FromUid = messages.FromUid
 		messageHistory.ToUid = messages.ToUid
 		messageHistory.ExtendInfo = messages.ExtendInfo
 		messageHistory.MessageContent = messages.MessageContent
-		tx = dao.Db.Create(messageHistory)
+		tx = begin.Create(messageHistory)
 		if tx.Error != nil {
-			dao.Db.Rollback()
+			begin.Rollback()
 			return
 		}
-		dao.Db.Commit()
+		begin.Commit()
 	} else if ackMessage.ChatType == 1 {
 		message := &dao.GroupMessagesRelation{}
 		tx := dao.Db.Model(message).Where("msg_id = %s and uid = ?", ackMessage.MessageId, client.UserId).First(message)
 		if tx.Error != nil {
 			return
 		}
-		dao.Db.Begin()
+		begin := dao.Db.Begin()
 		//删除临时消息表
-		tx = dao.Db.Unscoped().Delete(message)
+		tx = begin.Unscoped().Delete(message)
 		if tx.Error != nil {
-			dao.Db.Rollback()
+			begin.Rollback()
 			return
 		}
 		messageHistory := &dao.GroupMessagesHistoryRelation{}
 		messageHistory.Uid = message.Uid
 		messageHistory.MsgId = message.MsgId
-		tx = dao.Db.Create(messageHistory)
+		tx = begin.Create(messageHistory)
 		if tx.Error != nil {
-			dao.Db.Rollback()
+			begin.Rollback()
 			return
 		}
-		dao.Db.Commit()
+		begin.Commit()
 	}
-}
-
-func GetUserInfoById(uid string) (info *model.OnLineUserInfo, err error) {
-	rdbResult := dao.Rdb.HGet(context.Background(), constant.Redis_key_user_im_login_info, uid)
-	if rdbResult.Err() != nil {
-		err = errors.New("未登录")
-		return
-	}
-	result, _ := rdbResult.Result()
-	info = &model.OnLineUserInfo{}
-	err = jsoniter.UnmarshalFromString(result, info)
-	return
 }

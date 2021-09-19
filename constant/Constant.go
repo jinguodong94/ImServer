@@ -23,8 +23,9 @@ const (
 
 	//redis key
 	Redis_key_user_im_login_info = "user_im_login_info"
-
-	Redis_key_user_login_token = "user_login_token"
+	Redis_key_user_login_token   = "user_login_token"
+	Redis_key_room_users         = "room_users"
+	Redis_key_room_info          = "room_info"
 
 	Token = "token"
 )

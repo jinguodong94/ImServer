@@ -3,12 +3,12 @@ package socket
 import (
 	"errors"
 	"fmt"
-	"gindemo/constant"
-	"gindemo/dao"
-	"gindemo/model"
-	"gindemo/utils"
 	"github.com/gorilla/websocket"
 	"github.com/json-iterator/go"
+	"imserver/constant"
+	"imserver/dao"
+	"imserver/model"
+	"imserver/utils"
 	"log"
 )
 

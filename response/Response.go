@@ -12,13 +12,6 @@ type Response struct {
 	Data interface{} `json:"data"`
 }
 
-type UserInfo struct {
-	Account  string `json:"account"`
-	NickName string `json:"nick_name"`
-	Icon     string `json:"icon"`
-	Token    string `json:"token"`
-}
-
 func NewResponse(code int, msg string, data interface{}) (resp *Response) {
 	resp = new(Response)
 	resp.Code = code

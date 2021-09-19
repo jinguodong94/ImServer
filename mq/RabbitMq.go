@@ -2,8 +2,8 @@ package mq
 
 import (
 	"fmt"
-	"gindemo/conf"
 	"github.com/streadway/amqp"
+	"imserver/conf"
 	"log"
 	"time"
 )

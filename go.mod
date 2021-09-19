@@ -1,4 +1,4 @@
-module gindemo
+module imserver
 
 go 1.16
 

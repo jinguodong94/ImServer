@@ -1,13 +1,14 @@
 package main
 
 import (
-	"gindemo/conf"
-	"gindemo/dao"
-	"gindemo/mq"
-	"gindemo/route"
-	"gindemo/socket"
-	"gindemo/task"
+	"fmt"
 	"github.com/json-iterator/go/extra"
+	"imserver/conf"
+	"imserver/dao"
+	"imserver/mq"
+	"imserver/route"
+	"imserver/socket"
+	"imserver/task"
 	"log"
 )
 
@@ -37,16 +38,21 @@ func main() {
 	//启动定时清理客户端任务
 	task.StartClearClientTask()
 
+	serverConfig := conf.Configs.ServerConfig
+
 	//启动websocket 服务
-	go socket.StartServer("localhost:8686")
+	go socket.StartServer(fmt.Sprintf("%s:%d", serverConfig.WebSocketServerIp, serverConfig.WebSocketServerPort))
 
 	//初始化MQ
-	mq.MQ = mq.NewRabbitMQ("msg", "amq.topic", conf.Configs.ServerConfig.ServerId, socket.Consumer)
+	mq.MQ = mq.NewRabbitMQ("msg", "amq.topic", serverConfig.ServerId, socket.Consumer)
 	go mq.MQ.Start()
 
 	//启动http服务
 	log.Println("启动http服务")
-	route.Route.Run(":8989")
+	err := route.Route.Run(fmt.Sprintf("%s:%d", serverConfig.HttpServerIp, serverConfig.HttpServerPort))
+	if err != nil {
+		panic("httpServer run error : " + err.Error())
+	}
 }
 
 func init() {

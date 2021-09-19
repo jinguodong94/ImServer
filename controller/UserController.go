@@ -3,12 +3,12 @@ package controller
 import (
 	"context"
 	"fmt"
-	"gindemo/constant"
-	"gindemo/dao"
-	"gindemo/req"
-	"gindemo/response"
-	"gindemo/utils"
 	"github.com/gin-gonic/gin"
+	"imserver/constant"
+	"imserver/dao"
+	"imserver/req"
+	"imserver/response"
+	"imserver/utils"
 	"strconv"
 	"time"
 )
@@ -91,18 +91,19 @@ func (userController UserController) Register(ctx *gin.Context) {
 
 //获取个人信息
 func (userController UserController) GetUserInfo(ctx *gin.Context) {
-	//userId, ok := ctx.GetQuery("userId")
-	//token := ctx.GetHeader("token")
-	//if token == "" && !ok {
-	//	responseOk(ctx, response.NewErrorResponse("参数有误"))
-	//	return
-	//}
-	//if token != "" {
-	//	id, err := utils.TokenUtils.GetUserId(token)
-	//	if err != nil {
-	//
-	//	}
-	//}
+	userId, ok := ctx.GetQuery("userId")
+	if !ok {
+		responseOk(ctx, response.NewErrorResponse("参数有误"))
+		return
+	}
+	userInfo := &dao.Users{}
+	tx := dao.Db.Model(userInfo).Where("id = ?", userId).First(userInfo)
+	if tx.Error != nil {
+		responseOk(ctx, response.NewErrorResponse("获取失败"))
+		return
+	}
+	userInfo.Pwd = ""
+	responseOk(ctx, response.NewSuccessResponse("获取成功", userInfo))
 }
 
 //修改个人信息

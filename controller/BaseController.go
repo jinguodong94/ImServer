@@ -1,9 +1,9 @@
 package controller
 
 import (
-	"gindemo/constant"
-	"gindemo/utils"
 	"github.com/gin-gonic/gin"
+	"imserver/constant"
+	"imserver/utils"
 	"net/http"
 )
 

@@ -6,6 +6,7 @@ const (
 	TableName_GroupMessages         = "group_messages"
 	TableName_GroupMessagesRelation = "group_messages_relations"
 	TableName_UserGroupRelations    = "user_group_relations"
+	TableName_FriendRelations       = "friend_relations"
 )
 
 //用户表
@@ -89,7 +90,7 @@ type Groups struct {
 	GroupName string `gorm:"type:varchar(32);not null;comment:'群名'" json:"group_name"` //群名
 	Notice    string `gorm:"comment:'公告'" json:"notice"`                               //公告
 	Icon      string `gorm:"comment:'头像'" json:"icon"`                                 //群头像
-	Extend    string //扩展字段
+	Extend    string `json:"extend"`                                                   //扩展字段
 }
 
 //用户和群组关系表
@@ -97,5 +98,22 @@ type UserGroupRelation struct {
 	gorm.Model
 	Uid     uint `gorm:"index;not null" json:"uid"`
 	GroupId uint `gorm:"index;not null" json:"group_id"`
-	Role    int  `gorm:"not null;default 0;comment:'成员角色 0 普通成员,1 房主 ,2 管理员'" json:"role"`
+	Role    int  `gorm:"not null;default 0;comment:'成员角色 0 普通成员,1 群主 ,2 管理员'" json:"role"`
+}
+
+//好友关系表
+type FriendRelation struct {
+	gorm.Model
+	Uid      uint `gorm:"index;not null" json:"uid"`
+	FriendId uint `gorm:"index;not null" json:"friend_id"`
+	Status   int  `gorm:"not null;comment:'0 正常关系  1 已拉黑'" json:"status"`
+}
+
+//好友申请表
+type FriendApply struct {
+	gorm.Model
+	ToUid    uint   `gorm:"index;not null" json:"to_uid"`
+	ApplyUid uint   `gorm:"index;not null;comment:'申请人id'" json:"apply_uid"`
+	Status   int    `gorm:"not null;comment:'0 未处理  1 同意  2 拒绝'" json:"status"`
+	Remarks  string `gorm:"not null;comment:'备注'" json:"remarks"`
 }

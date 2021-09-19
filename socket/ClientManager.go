@@ -11,42 +11,59 @@ var (
 
 type ClientManager struct {
 	//所有客户端
-	allClient []*Client
+	allClient map[*Client]bool
 	//已登录的客户端
 	loginedClient map[string]*Client
+
+	addClientChan      chan *Client
+	addLoginClientChan chan *Client
+	removeClientChan   chan *Client
 }
 
 func NewClientManager() (clientManager *ClientManager) {
 	clientManager = &ClientManager{
-		allClient:     make([]*Client, 0, 10),
-		loginedClient: make(map[string]*Client),
+		allClient:          make(map[*Client]bool),
+		loginedClient:      make(map[string]*Client),
+		addClientChan:      make(chan *Client, 10),
+		addLoginClientChan: make(chan *Client, 10),
+		removeClientChan:   make(chan *Client, 10),
 	}
 	return
 }
 
+func (mgr *ClientManager) Init() {
+	go func() {
+		for {
+			select {
+			case client := <-ClientMgr.addClientChan:
+				mgr.allClient[client] = true
+
+			case client := <-ClientMgr.addLoginClientChan:
+				mgr.loginedClient[client.UserId] = client
+
+			case client := <-ClientMgr.removeClientChan:
+				delete(mgr.allClient, client)
+				if client.UserId != "" {
+					delete(mgr.loginedClient, client.UserId)
+				}
+			}
+		}
+	}()
+}
+
 //添加客户端到所有
 func (mgr *ClientManager) AddClient(client *Client) {
-	clientRwLock.Lock()
-	defer clientRwLock.Unlock()
-	mgr.allClient = append(mgr.allClient, client)
+	mgr.addClientChan <- client
 }
 
 //删除客户端
 func (mgr *ClientManager) DelClient(client *Client) {
-	clientRwLock.Lock()
-	defer clientRwLock.Unlock()
-	remove(mgr.allClient, client)
-	mgr.allClient = remove(mgr.allClient, client)
-	if client.UserId != "" {
-		delete(mgr.loginedClient, client.UserId)
-	}
+	mgr.removeClientChan <- client
 }
 
 //添加已登录的客户端
 func (mgr *ClientManager) AddLoginClient(client *Client) {
-	clientRwLock.Lock()
-	defer clientRwLock.Unlock()
-	mgr.loginedClient[client.UserId] = client
+	mgr.addLoginClientChan <- client
 }
 
 //获取客户端
@@ -57,33 +74,11 @@ func (mgr *ClientManager) GetClientByUserId(userId string) *Client {
 }
 
 //获取所有客户端
-func (mgr *ClientManager) GetAllClient() []*Client {
+func (mgr *ClientManager) GetAllClient() map[*Client]bool {
 	return mgr.allClient
 }
 
 //获取已登录的客户端
 func (mgr *ClientManager) GetLoginClient() map[string]*Client {
 	return mgr.loginedClient
-}
-
-func remove(slice []*Client, e *Client) []*Client {
-	position := getPosition(slice, e)
-	return removeByPosition(slice, position)
-}
-
-func removeByPosition(slice []*Client, position int) []*Client {
-	if position != -1 {
-		return append(slice[:position], slice[position+1:]...)
-	}
-	return slice
-}
-
-//获取元素位置
-func getPosition(slice []*Client, e *Client) int {
-	for index, value := range slice {
-		if value == e {
-			return index
-		}
-	}
-	return -1
 }

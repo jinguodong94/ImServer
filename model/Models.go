@@ -1,6 +1,6 @@
 package model
 
-import "gindemo/dao"
+import "imserver/dao"
 
 //数据返回
 type MsgResponse struct {

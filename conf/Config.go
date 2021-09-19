@@ -44,5 +44,9 @@ type RabbitMQConfig struct {
 }
 
 type ServerConfig struct {
-	ServerId string `ini:"serverId"`
+	ServerId            string `ini:"serverId"`
+	HttpServerIp        string `ini:"http_server_ip"`
+	HttpServerPort      int    `ini:"http_server_port"`
+	WebSocketServerIp   string `ini:"websocket_server_ip"`
+	WebSocketServerPort int    `ini:"websocket_server_port"`
 }

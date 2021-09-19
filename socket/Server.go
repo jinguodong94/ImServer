@@ -10,6 +10,8 @@ func StartServer(addr string) {
 
 	log.Println("启动websocket服务")
 
+	ClientMgr.Init()
+
 	http.HandleFunc("/websocket", func(writer http.ResponseWriter, request *http.Request) {
 		// 升级协议
 		conn, err := (&websocket.Upgrader{CheckOrigin: func(r *http.Request) bool {

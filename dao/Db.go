@@ -2,9 +2,9 @@ package dao
 
 import (
 	"fmt"
-	"gindemo/conf"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"imserver/conf"
 	"log"
 )
 

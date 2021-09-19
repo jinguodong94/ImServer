@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"gindemo/socket"
 	"github.com/gin-gonic/gin"
+	"imserver/socket"
 	"net/http"
 )
 

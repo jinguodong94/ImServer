@@ -2,10 +2,10 @@ package controller
 
 import (
 	"fmt"
-	"gindemo/dao"
-	"gindemo/req"
-	"gindemo/response"
 	"github.com/gin-gonic/gin"
+	"imserver/dao"
+	"imserver/req"
+	"imserver/response"
 	"strconv"
 )
 
@@ -31,29 +31,29 @@ func (GroupController) CreateGroup(ctx *gin.Context) {
 	dao.Db.AutoMigrate(groups)
 
 	//开启事务
-	dao.Db.Begin()
+	begin := dao.Db.Begin()
 
 	groups.GroupName = createReq.GroupName
 	groups.Icon = createReq.Icon
-	tx := dao.Db.Create(groups)
+	tx := begin.Create(groups)
 	if tx.Error != nil {
 		responseOk(ctx, response.NewErrorResponse("创建失败"))
-		dao.Db.Rollback()
+		begin.Rollback()
 		return
 	}
 	//添加房主到群关系表
 	userGroupRelation := &dao.UserGroupRelation{}
-	dao.Db.AutoMigrate(userGroupRelation)
+	begin.AutoMigrate(userGroupRelation)
 	userGroupRelation.Uid = uid
 	userGroupRelation.GroupId = groups.ID
 	userGroupRelation.Role = 1
-	tx = dao.Db.Create(userGroupRelation)
+	tx = begin.Create(userGroupRelation)
 	if tx.Error != nil {
 		responseOk(ctx, response.NewErrorResponse("创建失败"))
-		dao.Db.Rollback()
+		begin.Rollback()
 		return
 	}
-	dao.Db.Commit()
+	begin.Commit()
 	responseOk(ctx, response.NewSuccessResponse("创建成功", groups))
 }
 
